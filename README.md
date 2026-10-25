@@ -18,7 +18,7 @@
 
 ## 📌 Overview
 
-Host file integrity monitor with HMAC-signed baselines
+OFim — Host File Integrity Monitor. It provides baseline engine — walks chosen directories and records hash, size, mode, uid/gid, owner/group, mtime, ctime, inode, nlink, device, symlink target. Built-in demo/self-test paths and severity gates help validate detections without touching production when those flags are used.
 
 ---
 
@@ -30,12 +30,6 @@ Host file integrity monitor with HMAC-signed baselines
 - Compare engine — added / removed / modified / permission / ownership / type / inode / symlink retarget / metadata-only change classification
 - Suspicious-change rules — new SUID/SGID, world- writable, /etc, /bin, /sbin, cron, systemd units, authorized_keys, sudoers, PAM, ld.so.preload, PATH binaries, hidden executables, kernel modules
 - Severity model with configurable floor + --fail-on
-- Change history journal (JSON-lines) + viewer
-- Accept changes — re-baseline after review
-- Exports — TXT / Markdown / JSON / CSV / SARIF 2.1.0
-- Exclude globs, max file size, one-filesystem mode
-- Self-test demo — builds a sample tree, baselines, mutates and diffs it (fully sandboxed in a temp dir)
-- Full CLI mode (init, check, paths, history, demo)
 
 ---
 
@@ -49,7 +43,11 @@ Host file integrity monitor with HMAC-signed baselines
 ## 🚀 Usage
 
 ```bash
-./OFim
+./OFim                                     # interactive menu
+./OFim demo
+./OFim init -p /etc -p /bin
+./OFim check --min-severity medium
+./OFim --help
 ```
 
 ---
